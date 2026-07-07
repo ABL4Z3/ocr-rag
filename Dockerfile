@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# CPU-only PyTorch + EasyOCR (avoids ~1.5GB CUDA deps from torch)
+RUN pip install --no-cache-dir torch easyocr --index-url https://download.pytorch.org/whl/cpu
+
 COPY . .
 RUN python scripts/download_models.py
 
