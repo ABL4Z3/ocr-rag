@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     project_name: str = "OCR API"
     version: str = "0.1.0"
-    ocr_lang: str = "devanagari"
+    ocr_lang: str = "mr"
     ocr_dpi: int = 220
     ocr_eager_load: bool = False
     ocr_use_doc_orientation_classify: bool = False
