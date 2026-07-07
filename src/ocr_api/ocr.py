@@ -11,8 +11,6 @@ from fastapi import HTTPException, UploadFile
 from .config import settings
 from .schemas import OCRLine, OCRPage, OCRResponse
 
-DEVANAGARI_LANGS = frozenset({"hi", "mr", "ne", "sa", "bh", "mai"})
-
 OCR_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
 PDF_EXTENSIONS = {".pdf"}
 DOCX_EXTENSIONS = {".docx"}
@@ -68,21 +66,19 @@ class OCRService:
 
     def extract_pdf(self, path: Path) -> list[OCRPage]:
         pages: list[OCRPage] = []
-        force_ocr = settings.ocr_lang in DEVANAGARI_LANGS
         with fitz.open(path) as document:
             for index, page in enumerate(document, start=1):
-                if not force_ocr:
-                    text = page.get_text("text").strip()
-                    if text:
-                        pages.append(
-                            OCRPage(
-                                page_number=index,
-                                source="text-layer",
-                                text=text,
-                                lines=[OCRLine(text=line) for line in text.splitlines() if line.strip()],
-                            )
+                text = page.get_text("text").strip()
+                if text:
+                    pages.append(
+                        OCRPage(
+                            page_number=index,
+                            source="text-layer",
+                            text=text,
+                            lines=[OCRLine(text=line) for line in text.splitlines() if line.strip()],
                         )
-                        continue
+                    )
+                    continue
 
                 pix = page.get_pixmap(dpi=settings.ocr_dpi, alpha=False)
                 with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp:
