@@ -37,6 +37,6 @@ async def health() -> dict[str, str]:
 
 
 @app.post("/extract", response_model=OCRResponse)
-async def extract(file: UploadFile = File(...)) -> OCRResponse:
-    return await ocr_service.extract_upload(file)
+async def extract(file: UploadFile = File(...), lang: str | None = None) -> OCRResponse:
+    return await ocr_service.extract_upload(file, lang=lang)
 

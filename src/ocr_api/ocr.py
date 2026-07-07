@@ -19,21 +19,24 @@ DOCX_EXTENSIONS = {".docx"}
 class OCRService:
     def __init__(self) -> None:
         self._engine: Any | None = None
+        self._lang: str | None = None
 
-    def load(self) -> None:
-        if self._engine is not None:
+    def load(self, lang: str | None = None) -> None:
+        target = lang or settings.ocr_lang
+        if self._engine is not None and self._lang == target:
             return
 
         from paddleocr import PaddleOCR
 
         self._engine = PaddleOCR(
-            lang=settings.ocr_lang,
+            lang=target,
             use_doc_orientation_classify=settings.ocr_use_doc_orientation_classify,
             use_doc_unwarping=settings.ocr_use_doc_unwarping,
             use_textline_orientation=settings.ocr_use_textline_orientation,
         )
+        self._lang = target
 
-    async def extract_upload(self, upload: UploadFile) -> OCRResponse:
+    async def extract_upload(self, upload: UploadFile, lang: str | None = None) -> OCRResponse:
         suffix = Path(upload.filename or "").suffix.lower()
         if suffix not in OCR_EXTENSIONS | PDF_EXTENSIONS | DOCX_EXTENSIONS:
             raise HTTPException(
@@ -47,11 +50,11 @@ class OCRService:
 
         try:
             if suffix in PDF_EXTENSIONS:
-                pages = self.extract_pdf(path)
+                pages = self.extract_pdf(path, lang=lang)
             elif suffix in DOCX_EXTENSIONS:
                 pages = self.extract_docx(path)
             else:
-                pages = [self.extract_image(path, page_number=1)]
+                pages = [self.extract_image(path, page_number=1, lang=lang)]
         finally:
             path.unlink(missing_ok=True)
 
@@ -64,7 +67,7 @@ class OCRService:
             pages=pages,
         )
 
-    def extract_pdf(self, path: Path) -> list[OCRPage]:
+    def extract_pdf(self, path: Path, lang: str | None = None) -> list[OCRPage]:
         pages: list[OCRPage] = []
         with fitz.open(path) as document:
             for index, page in enumerate(document, start=1):
@@ -85,7 +88,7 @@ class OCRService:
                     image_path = Path(tmp.name)
                 pix.save(image_path)
                 try:
-                    pages.append(self.extract_image(image_path, page_number=index))
+                    pages.append(self.extract_image(image_path, page_number=index, lang=lang))
                 finally:
                     image_path.unlink(missing_ok=True)
         return pages
@@ -103,8 +106,8 @@ class OCRService:
             )
         ]
 
-    def extract_image(self, path: Path, page_number: int) -> OCRPage:
-        self.load()
+    def extract_image(self, path: Path, page_number: int, lang: str | None = None) -> OCRPage:
+        self.load(lang)
         assert self._engine is not None
 
         if hasattr(self._engine, "predict"):
