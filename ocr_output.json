@@ -1,0 +1,1204 @@
+﻿python.exe : INFO: Could not find files for the given pattern(s).
+At line:1 char:85
++ ... NG="utf-8"; & "C:\Users\Lenovo\Downloads\ocr\.venv\Scripts\python.exe ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INFO: Could not...ven pattern(s).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+C:\Users\Lenovo\Downloads\ocr\.venv\Lib\site-packages\paddle\utils\cpp_extension\extension_utils.py:718: UserWarning: 
+No ccache found. Please be aware that recompiling all source files may be required. You can download and install 
+ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: 
+`C:\Users\Lenovo\.paddlex\official_models\PP-OCRv5_server_det`.[0m
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0707 09:56:40.584416 21368 onednn_context.cc:81] oneDNN v3.6.2
+[32mCreating model: ('devanagari_PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: 
+`C:\Users\Lenovo\.paddlex\official_models\devanagari_PP-OCRv5_mobile_rec`.[0m
+{
+  "filename": "2102235lrgzyso.pdf",
+  "content_type": null,
+  "page_count": 1,
+  "text": "DR. A.P.J. ABDUL KALAM TECHNICAL UNIVERSITY, UTTAR PRADESH\nJankipuram Vistar, Sector-11, Sitapur Road, Lucknow, 226031.\nACADEMIC CALENDAR (For SESSI0N 2026-27)\nFOR B.TECH. /B.PHARM. /B.ARCH./B.H.M.C.T/BFAD/BVOC/MBA/MBATM/MBA(I)/MCA/MCA(I)/BFA/M.TECH/M.PHARM/M.ARCH. & OTHER COURSES\nRef. No.: AKTU/RO/2026/\nDate:\n3-7-2026\nS.\nParticulars\nDates\nNo.\nOdd Semester\nCommencement of Classes for Academic\n1.\nJuly 14, 2026 For III, V, VII & IX Semester\nsession 2026-27 (Other than First Year)\nfor all UG & PG programs.\nJan. 01, 2027, For II, IV, VI, VIII and X\nAug. 01, 2026* for 1st semester all Programs\nSemester for all UG & PG programs.\nCommencement of Classes for First Year all\nexcept B.Pharm (1st Year)\n2.\ncourses\nSept. 01, 2026* for first semester B.Pharm\nPrograms\nSept. 1, 2026* for all Programs except\nLast date of submitting admission list of\nB.Pharm (Newly Admitted)\n3.\nstudents to University (for newly admitted\nSept. 15, 2026* for B.Pharm (Newly\nstudents)\nAdmitted)\nSept. 15, 2026* all Programs except B.Pharm\nLast date of submitting Enrollment Form\n(Newly Admitted)\nand Filling of Registration & Exam Form\n4.\nfor newly admitted students along with Fee.\nSept. 30, 2026* for B.Pharm (Newly\nAdmitted)\nLMT Fest (Zonal Level): Jan. 07-09, 2027\nSports (Zonal Level): Oct. 15-17, 2026\nLMT Fest (State Level): Jan. 21-23, 2027\n5.\nAKTU Fests\nSports (State Level): Oct. 29-31, 2026\nArts & Cultural (Zonal Level): Feb. 04-06, 2027\nArts & Cultural (State Level): Feb. 18-20, 2027\nLast date of submitting Exam Form for\n6.\nregular & carry over Examination along\nNov. 01, 2026\nMarch 31, 2027\nwith Fee.\n7.\nLast date of submitting Sessional marks of\nNov. 16, 2026\nApril 15, 2027\nTheory & Practical to University.\nNov. 24, 2026, to Dec. 27, 2026 all Programs\nRange of Dates for End Semester Theory\nexcept B.Pharm (1st& 3rdSemester)\n8.\nExaminations\nApril 20, 2027 to May 20, 2027\nDec. 03, 2025, to Dec. 24, 2026 B.Pharm\nNewly Admitted (1st & 3rd Semester)\nRange of Dates for End Semester\n9.\nDec. 07, 2025, to Dec. 24, 2026\nMay 01, 2027 to May 24, 2027\nPractical Examination (PE)\n10.\nLast date for Submission of PE Marks\nAs Per schedule of Practical Examination\nAs Per schedule of Practical Examination\n11.\nStart of Evaluation of Answer sheets\nDec. 09, 2026\nMay 01, 2027\n12.\nEnd Semester Result Declaration\nJan. 15, 2027\nJune 30, 2027\n13.\nSummer Training / Internship\nEnd semester examination to July 12, 2027\n14.\nWinter Vacations/Summer Vacation\nFrom the Last date of Exam till Dec. 31, 2026\nLast date of examination to July 12, 2027\n15.\nCommencement of Classes session 2026-27\nFor III, V, VII & IX Semester July 13, 2027\n*The dates are subject to modification as per updates from AICTE/PCI.\nΓåô\nIMPORTANT NOTES:\n1. The institute shall ensure minimum teaching hours as prescribed in the University ordinances for each semester. If required, the\nDirector/Principal shall arrange extra classes on weekends /holidays in offline/online mode.\n2. The Institute should ensure that at least two class tests are conducted after completing 1/3rd& 2/3rd syllabus respectively. All students will be\nrequired to appear in both first- and second-class tests. If, for any reason beyond the control of students such as illness, tragic incident in\nfamily, the student fails to appear in any test, it will be the responsibility of the Principle/Director of the Institute to arrange make up class\ntest for such students. If the student fails to appear in first class test, his makeup class test will be conducted before second class test and in\ncase of second-class test at least one month before the start of end semester theory examination. The duration of class test will be minimum\none hour for each class test. In case attendance is short; parents be informed accordingly on monthly basis.\n3. The Director/Principal of Institute shall ensure the submission of attendance of students regularly through Attendance Monitoring System\n(AMS) of the University and shall ensure that no student is allowed to appear in the examinations who has not attained the minimum required\nattendance as per norms prescribed in relevant ordinances. It will be obligatory on the part of the Director/Principal of the Institute to detain\nsuch students and their admit cards will not be issued to them. A list of students detained from appearing in University Examination(s) be\nsubmitted to their Examination center before the commencement of the theory examination.\n4. The teachers who are assigned evaluation duty during vacation shall be entitled for earned leave as per rules and duty leave for other\nexamination related works assigned by the University.\n5. The loss of syllabus for the newly admitted third semester B. Tech & B. Pharma students has to be COMPULSORILY made up by the\ninstitutes by conducting extra classes in early morning/late evening/Sunday/holidays.\nRegistrar",
+  "pages": [
+    {
+      "page_number": 1,
+      "source": "ocr",
+      "text": "DR. A.P.J. ABDUL KALAM TECHNICAL UNIVERSITY, UTTAR PRADESH\nJankipuram Vistar, Sector-11, Sitapur Road, Lucknow, 226031.\nACADEMIC CALENDAR (For SESSI0N 2026-27)\nFOR B.TECH. /B.PHARM. /B.ARCH./B.H.M.C.T/BFAD/BVOC/MBA/MBATM/MBA(I)/MCA/MCA(I)/BFA/M.TECH/M.PHARM/M.ARCH. & OTHER COURSES\nRef. No.: AKTU/RO/2026/\nDate:\n3-7-2026\nS.\nParticulars\nDates\nNo.\nOdd Semester\nCommencement of Classes for Academic\n1.\nJuly 14, 2026 For III, V, VII & IX Semester\nsession 2026-27 (Other than First Year)\nfor all UG & PG programs.\nJan. 01, 2027, For II, IV, VI, VIII and X\nAug. 01, 2026* for 1st semester all Programs\nSemester for all UG & PG programs.\nCommencement of Classes for First Year all\nexcept B.Pharm (1st Year)\n2.\ncourses\nSept. 01, 2026* for first semester B.Pharm\nPrograms\nSept. 1, 2026* for all Programs except\nLast date of submitting admission list of\nB.Pharm (Newly Admitted)\n3.\nstudents to University (for newly admitted\nSept. 15, 2026* for B.Pharm (Newly\nstudents)\nAdmitted)\nSept. 15, 2026* all Programs except B.Pharm\nLast date of submitting Enrollment Form\n(Newly Admitted)\nand Filling of Registration & Exam Form\n4.\nfor newly admitted students along with Fee.\nSept. 30, 2026* for B.Pharm (Newly\nAdmitted)\nLMT Fest (Zonal Level): Jan. 07-09, 2027\nSports (Zonal Level): Oct. 15-17, 2026\nLMT Fest (State Level): Jan. 21-23, 2027\n5.\nAKTU Fests\nSports (State Level): Oct. 29-31, 2026\nArts & Cultural (Zonal Level): Feb. 04-06, 2027\nArts & Cultural (State Level): Feb. 18-20, 2027\nLast date of submitting Exam Form for\n6.\nregular & carry over Examination along\nNov. 01, 2026\nMarch 31, 2027\nwith Fee.\n7.\nLast date of submitting Sessional marks of\nNov. 16, 2026\nApril 15, 2027\nTheory & Practical to University.\nNov. 24, 2026, to Dec. 27, 2026 all Programs\nRange of Dates for End Semester Theory\nexcept B.Pharm (1st& 3rdSemester)\n8.\nExaminations\nApril 20, 2027 to May 20, 2027\nDec. 03, 2025, to Dec. 24, 2026 B.Pharm\nNewly Admitted (1st & 3rd Semester)\nRange of Dates for End Semester\n9.\nDec. 07, 2025, to Dec. 24, 2026\nMay 01, 2027 to May 24, 2027\nPractical Examination (PE)\n10.\nLast date for Submission of PE Marks\nAs Per schedule of Practical Examination\nAs Per schedule of Practical Examination\n11.\nStart of Evaluation of Answer sheets\nDec. 09, 2026\nMay 01, 2027\n12.\nEnd Semester Result Declaration\nJan. 15, 2027\nJune 30, 2027\n13.\nSummer Training / Internship\nEnd semester examination to July 12, 2027\n14.\nWinter Vacations/Summer Vacation\nFrom the Last date of Exam till Dec. 31, 2026\nLast date of examination to July 12, 2027\n15.\nCommencement of Classes session 2026-27\nFor III, V, VII & IX Semester July 13, 2027\n*The dates are subject to modification as per updates from AICTE/PCI.\nΓåô\nIMPORTANT NOTES:\n1. The institute shall ensure minimum teaching hours as prescribed in the University ordinances for each semester. If required, the\nDirector/Principal shall arrange extra classes on weekends /holidays in offline/online mode.\n2. The Institute should ensure that at least two class tests are conducted after completing 1/3rd& 2/3rd syllabus respectively. All students will be\nrequired to appear in both first- and second-class tests. If, for any reason beyond the control of students such as illness, tragic incident in\nfamily, the student fails to appear in any test, it will be the responsibility of the Principle/Director of the Institute to arrange make up class\ntest for such students. If the student fails to appear in first class test, his makeup class test will be conducted before second class test and in\ncase of second-class test at least one month before the start of end semester theory examination. The duration of class test will be minimum\none hour for each class test. In case attendance is short; parents be informed accordingly on monthly basis.\n3. The Director/Principal of Institute shall ensure the submission of attendance of students regularly through Attendance Monitoring System\n(AMS) of the University and shall ensure that no student is allowed to appear in the examinations who has not attained the minimum required\nattendance as per norms prescribed in relevant ordinances. It will be obligatory on the part of the Director/Principal of the Institute to detain\nsuch students and their admit cards will not be issued to them. A list of students detained from appearing in University Examination(s) be\nsubmitted to their Examination center before the commencement of the theory examination.\n4. The teachers who are assigned evaluation duty during vacation shall be entitled for earned leave as per rules and duty leave for other\nexamination related works assigned by the University.\n5. The loss of syllabus for the newly admitted third semester B. Tech & B. Pharma students has to be COMPULSORILY made up by the\ninstitutes by conducting extra classes in early morning/late evening/Sunday/holidays.\nRegistrar",
+      "lines": [
+        {
+          "text": "DR. A.P.J. ABDUL KALAM TECHNICAL UNIVERSITY, UTTAR PRADESH",
+          "confidence": 0.9823076128959656,
+          "bbox": [
+            263,
+            42,
+            1532,
+            83
+          ]
+        },
+        {
+          "text": "Jankipuram Vistar, Sector-11, Sitapur Road, Lucknow, 226031.",
+          "confidence": 0.9717376828193665,
+          "bbox": [
+            433,
+            85,
+            1355,
+            127
+          ]
+        },
+        {
+          "text": "ACADEMIC CALENDAR (For SESSI0N 2026-27)",
+          "confidence": 0.9892798066139221,
+          "bbox": [
+            556,
+            166,
+            1233,
+            202
+          ]
+        },
+        {
+          "text": "FOR B.TECH. /B.PHARM. /B.ARCH./B.H.M.C.T/BFAD/BVOC/MBA/MBATM/MBA(I)/MCA/MCA(I)/BFA/M.TECH/M.PHARM/M.ARCH. & OTHER COURSES",
+          "confidence": 0.9813372492790222,
+          "bbox": [
+            135,
+            204,
+            1662,
+            234
+          ]
+        },
+        {
+          "text": "Ref. No.: AKTU/RO/2026/",
+          "confidence": 0.9574671983718872,
+          "bbox": [
+            104,
+            235,
+            455,
+            266
+          ]
+        },
+        {
+          "text": "Date:",
+          "confidence": 0.9996261596679688,
+          "bbox": [
+            1401,
+            237,
+            1483,
+            274
+          ]
+        },
+        {
+          "text": "3-7-2026",
+          "confidence": 0.9098843336105347,
+          "bbox": [
+            1489,
+            226,
+            1752,
+            289
+          ]
+        },
+        {
+          "text": "S.",
+          "confidence": 0.8453657627105713,
+          "bbox": [
+            123,
+            294,
+            159,
+            327
+          ]
+        },
+        {
+          "text": "Particulars",
+          "confidence": 0.9998682141304016,
+          "bbox": [
+            345,
+            296,
+            484,
+            325
+          ]
+        },
+        {
+          "text": "Dates",
+          "confidence": 0.9996201395988464,
+          "bbox": [
+            1129,
+            296,
+            1206,
+            329
+          ]
+        },
+        {
+          "text": "No.",
+          "confidence": 0.9981157779693604,
+          "bbox": [
+            114,
+            325,
+            168,
+            360
+          ]
+        },
+        {
+          "text": "Odd Semester",
+          "confidence": 0.9993886351585388,
+          "bbox": [
+            814,
+            329,
+            986,
+            360
+          ]
+        },
+        {
+          "text": "Commencement of Classes for Academic",
+          "confidence": 0.9990336298942566,
+          "bbox": [
+            200,
+            389,
+            633,
+            417
+          ]
+        },
+        {
+          "text": "1.",
+          "confidence": 0.9946026802062988,
+          "bbox": [
+            117,
+            401,
+            147,
+            434
+          ]
+        },
+        {
+          "text": "July 14, 2026 For III, V, VII & IX Semester",
+          "confidence": 0.9663265347480774,
+          "bbox": [
+            669,
+            396,
+            1130,
+            427
+          ]
+        },
+        {
+          "text": "session 2026-27 (Other than First Year)",
+          "confidence": 0.9839872717857361,
+          "bbox": [
+            206,
+            419,
+            626,
+            447
+          ]
+        },
+        {
+          "text": "for all UG & PG programs.",
+          "confidence": 0.9686450362205505,
+          "bbox": [
+            754,
+            425,
+            1047,
+            456
+          ]
+        },
+        {
+          "text": "Jan. 01, 2027, For II, IV, VI, VIII and X",
+          "confidence": 0.9669585824012756,
+          "bbox": [
+            1202,
+            450,
+            1630,
+            480
+          ]
+        },
+        {
+          "text": "Aug. 01, 2026* for 1st semester all Programs",
+          "confidence": 0.9860745072364807,
+          "bbox": [
+            668,
+            477,
+            1134,
+            507
+          ]
+        },
+        {
+          "text": "Semester for all UG & PG programs.",
+          "confidence": 0.9843820929527283,
+          "bbox": [
+            1217,
+            477,
+            1615,
+            508
+          ]
+        },
+        {
+          "text": "Commencement of Classes for First Year all",
+          "confidence": 0.9813627600669861,
+          "bbox": [
+            174,
+            505,
+            640,
+            535
+          ]
+        },
+        {
+          "text": "except B.Pharm (1st Year)",
+          "confidence": 0.9861502051353455,
+          "bbox": [
+            762,
+            507,
+            1037,
+            534
+          ]
+        },
+        {
+          "text": "2.",
+          "confidence": 0.988479495048523,
+          "bbox": [
+            118,
+            524,
+            149,
+            558
+          ]
+        },
+        {
+          "text": "courses",
+          "confidence": 0.9996827840805054,
+          "bbox": [
+            363,
+            540,
+            449,
+            565
+          ]
+        },
+        {
+          "text": "Sept. 01, 2026* for first semester B.Pharm",
+          "confidence": 0.9802315831184387,
+          "bbox": [
+            677,
+            535,
+            1125,
+            565
+          ]
+        },
+        {
+          "text": "Programs",
+          "confidence": 0.9998087882995605,
+          "bbox": [
+            843,
+            563,
+            958,
+            595
+          ]
+        },
+        {
+          "text": "Sept. 1, 2026* for all Programs except",
+          "confidence": 0.987193763256073,
+          "bbox": [
+            701,
+            592,
+            1102,
+            621
+          ]
+        },
+        {
+          "text": "Last date of submitting admission list of",
+          "confidence": 0.9972862601280212,
+          "bbox": [
+            191,
+            606,
+            622,
+            633
+          ]
+        },
+        {
+          "text": "B.Pharm (Newly Admitted)",
+          "confidence": 0.9607207179069519,
+          "bbox": [
+            753,
+            616,
+            1048,
+            646
+          ]
+        },
+        {
+          "text": "3.",
+          "confidence": 0.9909141063690186,
+          "bbox": [
+            118,
+            627,
+            150,
+            659
+          ]
+        },
+        {
+          "text": "students to University (for newly admitted",
+          "confidence": 0.9953078031539917,
+          "bbox": [
+            182,
+            634,
+            629,
+            662
+          ]
+        },
+        {
+          "text": "Sept. 15, 2026* for B.Pharm (Newly",
+          "confidence": 0.9557552337646484,
+          "bbox": [
+            711,
+            644,
+            1090,
+            674
+          ]
+        },
+        {
+          "text": "students)",
+          "confidence": 0.9997022151947021,
+          "bbox": [
+            354,
+            659,
+            458,
+            693
+          ]
+        },
+        {
+          "text": "Admitted)",
+          "confidence": 0.9992215037345886,
+          "bbox": [
+            844,
+            669,
+            957,
+            698
+          ]
+        },
+        {
+          "text": "Sept. 15, 2026* all Programs except B.Pharm",
+          "confidence": 0.987570583820343,
+          "bbox": [
+            662,
+            699,
+            1140,
+            726
+          ]
+        },
+        {
+          "text": "Last date of submitting Enrollment Form",
+          "confidence": 0.9814192652702332,
+          "bbox": [
+            189,
+            711,
+            623,
+            739
+          ]
+        },
+        {
+          "text": "(Newly Admitted)",
+          "confidence": 0.9815787672996521,
+          "bbox": [
+            807,
+            728,
+            997,
+            756
+          ]
+        },
+        {
+          "text": "and Filling of Registration & Exam Form",
+          "confidence": 0.9940919280052185,
+          "bbox": [
+            186,
+            738,
+            626,
+            767
+          ]
+        },
+        {
+          "text": "4.",
+          "confidence": 0.9951955080032349,
+          "bbox": [
+            120,
+            752,
+            149,
+            780
+          ]
+        },
+        {
+          "text": "for newly admitted students along with Fee.",
+          "confidence": 0.9797755479812622,
+          "bbox": [
+            174,
+            765,
+            640,
+            794
+          ]
+        },
+        {
+          "text": "Sept. 30, 2026* for B.Pharm (Newly",
+          "confidence": 0.9825432896614075,
+          "bbox": [
+            713,
+            758,
+            1091,
+            786
+          ]
+        },
+        {
+          "text": "Admitted)",
+          "confidence": 0.983275830745697,
+          "bbox": [
+            844,
+            783,
+            959,
+            814
+          ]
+        },
+        {
+          "text": "LMT Fest (Zonal Level): Jan. 07-09, 2027",
+          "confidence": 0.9790140390396118,
+          "bbox": [
+            1196,
+            815,
+            1641,
+            845
+          ]
+        },
+        {
+          "text": "Sports (Zonal Level): Oct. 15-17, 2026",
+          "confidence": 0.9859389066696167,
+          "bbox": [
+            703,
+            845,
+            1103,
+            869
+          ]
+        },
+        {
+          "text": "LMT Fest (State Level): Jan. 21-23, 2027",
+          "confidence": 0.9853429794311523,
+          "bbox": [
+            1200,
+            843,
+            1638,
+            873
+          ]
+        },
+        {
+          "text": "5.",
+          "confidence": 0.9883898496627808,
+          "bbox": [
+            121,
+            854,
+            149,
+            884
+          ]
+        },
+        {
+          "text": "AKTU Fests",
+          "confidence": 0.997523307800293,
+          "bbox": [
+            338,
+            856,
+            478,
+            889
+          ]
+        },
+        {
+          "text": "Sports (State Level): Oct. 29-31, 2026",
+          "confidence": 0.9853892922401428,
+          "bbox": [
+            705,
+            873,
+            1098,
+            897
+          ]
+        },
+        {
+          "text": "Arts & Cultural (Zonal Level): Feb. 04-06, 2027",
+          "confidence": 0.9877527952194214,
+          "bbox": [
+            1165,
+            872,
+            1673,
+            901
+          ]
+        },
+        {
+          "text": "Arts & Cultural (State Level): Feb. 18-20, 2027",
+          "confidence": 0.9916784167289734,
+          "bbox": [
+            1169,
+            899,
+            1669,
+            929
+          ]
+        },
+        {
+          "text": "Last date of submitting Exam Form for",
+          "confidence": 0.9823087453842163,
+          "bbox": [
+            201,
+            937,
+            615,
+            964
+          ]
+        },
+        {
+          "text": "6.",
+          "confidence": 0.9940813779830933,
+          "bbox": [
+            121,
+            958,
+            151,
+            993
+          ]
+        },
+        {
+          "text": "regular & carry over Examination along",
+          "confidence": 0.9659942984580994,
+          "bbox": [
+            195,
+            965,
+            621,
+            998
+          ]
+        },
+        {
+          "text": "Nov. 01, 2026",
+          "confidence": 0.9620739817619324,
+          "bbox": [
+            829,
+            963,
+            977,
+            992
+          ]
+        },
+        {
+          "text": "March 31, 2027",
+          "confidence": 0.9993559718132019,
+          "bbox": [
+            1320,
+            966,
+            1489,
+            994
+          ]
+        },
+        {
+          "text": "with Fee.",
+          "confidence": 0.989797830581665,
+          "bbox": [
+            355,
+            993,
+            461,
+            1025
+          ]
+        },
+        {
+          "text": "7.",
+          "confidence": 0.993184506893158,
+          "bbox": [
+            121,
+            1045,
+            152,
+            1078
+          ]
+        },
+        {
+          "text": "Last date of submitting Sessional marks of",
+          "confidence": 0.9902924299240112,
+          "bbox": [
+            177,
+            1037,
+            640,
+            1065
+          ]
+        },
+        {
+          "text": "Nov. 16, 2026",
+          "confidence": 0.978378415107727,
+          "bbox": [
+            829,
+            1048,
+            978,
+            1081
+          ]
+        },
+        {
+          "text": "April 15, 2027",
+          "confidence": 0.9764356017112732,
+          "bbox": [
+            1328,
+            1052,
+            1483,
+            1082
+          ]
+        },
+        {
+          "text": "Theory & Practical to University.",
+          "confidence": 0.9893215298652649,
+          "bbox": [
+            222,
+            1066,
+            593,
+            1095
+          ]
+        },
+        {
+          "text": "Nov. 24, 2026, to Dec. 27, 2026 all Programs",
+          "confidence": 0.9894870519638062,
+          "bbox": [
+            672,
+            1102,
+            1136,
+            1132
+          ]
+        },
+        {
+          "text": "Range of Dates for End Semester Theory",
+          "confidence": 0.9786502718925476,
+          "bbox": [
+            182,
+            1126,
+            633,
+            1159
+          ]
+        },
+        {
+          "text": "except B.Pharm (1st& 3rdSemester)",
+          "confidence": 0.9926646947860718,
+          "bbox": [
+            716,
+            1132,
+            1092,
+            1156
+          ]
+        },
+        {
+          "text": "8.",
+          "confidence": 0.9934802055358887,
+          "bbox": [
+            123,
+            1142,
+            150,
+            1172
+          ]
+        },
+        {
+          "text": "Examinations",
+          "confidence": 0.9997324347496033,
+          "bbox": [
+            326,
+            1157,
+            489,
+            1187
+          ]
+        },
+        {
+          "text": "April 20, 2027 to May 20, 2027",
+          "confidence": 0.9817782640457153,
+          "bbox": [
+            1255,
+            1148,
+            1572,
+            1174
+          ]
+        },
+        {
+          "text": "Dec. 03, 2025, to Dec. 24, 2026 B.Pharm",
+          "confidence": 0.9764724373817444,
+          "bbox": [
+            694,
+            1163,
+            1114,
+            1192
+          ]
+        },
+        {
+          "text": "Newly Admitted (1st & 3rd Semester)",
+          "confidence": 0.9749600887298584,
+          "bbox": [
+            711,
+            1188,
+            1097,
+            1221
+          ]
+        },
+        {
+          "text": "Range of Dates for End Semester",
+          "confidence": 0.9972002506256104,
+          "bbox": [
+            225,
+            1220,
+            591,
+            1249
+          ]
+        },
+        {
+          "text": "9.",
+          "confidence": 0.9886181950569153,
+          "bbox": [
+            121,
+            1233,
+            153,
+            1267
+          ]
+        },
+        {
+          "text": "Dec. 07, 2025, to Dec. 24, 2026",
+          "confidence": 0.9747691750526428,
+          "bbox": [
+            745,
+            1236,
+            1065,
+            1263
+          ]
+        },
+        {
+          "text": "May 01, 2027 to May 24, 2027",
+          "confidence": 0.9628766179084778,
+          "bbox": [
+            1254,
+            1238,
+            1570,
+            1267
+          ]
+        },
+        {
+          "text": "Practical Examination (PE)",
+          "confidence": 0.9531307220458984,
+          "bbox": [
+            255,
+            1250,
+            564,
+            1279
+          ]
+        },
+        {
+          "text": "10.",
+          "confidence": 0.9958212971687317,
+          "bbox": [
+            123,
+            1285,
+            166,
+            1318
+          ]
+        },
+        {
+          "text": "Last date for Submission of PE Marks",
+          "confidence": 0.996123194694519,
+          "bbox": [
+            198,
+            1287,
+            619,
+            1315
+          ]
+        },
+        {
+          "text": "As Per schedule of Practical Examination",
+          "confidence": 0.9972626566886902,
+          "bbox": [
+            686,
+            1287,
+            1124,
+            1315
+          ]
+        },
+        {
+          "text": "As Per schedule of Practical Examination",
+          "confidence": 0.9922464489936829,
+          "bbox": [
+            1194,
+            1291,
+            1632,
+            1318
+          ]
+        },
+        {
+          "text": "11.",
+          "confidence": 0.9913320541381836,
+          "bbox": [
+            123,
+            1323,
+            166,
+            1356
+          ]
+        },
+        {
+          "text": "Start of Evaluation of Answer sheets",
+          "confidence": 0.9938532710075378,
+          "bbox": [
+            215,
+            1326,
+            604,
+            1354
+          ]
+        },
+        {
+          "text": "Dec. 09, 2026",
+          "confidence": 0.9571699500083923,
+          "bbox": [
+            833,
+            1330,
+            979,
+            1358
+          ]
+        },
+        {
+          "text": "May 01, 2027",
+          "confidence": 0.9922192096710205,
+          "bbox": [
+            1346,
+            1327,
+            1498,
+            1360
+          ]
+        },
+        {
+          "text": "12.",
+          "confidence": 0.9918882846832275,
+          "bbox": [
+            123,
+            1371,
+            167,
+            1405
+          ]
+        },
+        {
+          "text": "End Semester Result Declaration",
+          "confidence": 0.9894694089889526,
+          "bbox": [
+            234,
+            1373,
+            586,
+            1404
+          ]
+        },
+        {
+          "text": "Jan. 15, 2027",
+          "confidence": 0.9800252318382263,
+          "bbox": [
+            835,
+            1371,
+            978,
+            1400
+          ]
+        },
+        {
+          "text": "June 30, 2027",
+          "confidence": 0.9902054667472839,
+          "bbox": [
+            1336,
+            1375,
+            1490,
+            1410
+          ]
+        },
+        {
+          "text": "13.",
+          "confidence": 0.9963590502738953,
+          "bbox": [
+            123,
+            1417,
+            166,
+            1450
+          ]
+        },
+        {
+          "text": "Summer Training / Internship",
+          "confidence": 0.9710803031921387,
+          "bbox": [
+            252,
+            1420,
+            568,
+            1450
+          ]
+        },
+        {
+          "text": "End semester examination to July 12, 2027",
+          "confidence": 0.9928306937217712,
+          "bbox": [
+            1187,
+            1423,
+            1639,
+            1454
+          ]
+        },
+        {
+          "text": "14.",
+          "confidence": 0.9947517514228821,
+          "bbox": [
+            123,
+            1463,
+            166,
+            1497
+          ]
+        },
+        {
+          "text": "Winter Vacations/Summer Vacation",
+          "confidence": 0.9955880641937256,
+          "bbox": [
+            217,
+            1465,
+            604,
+            1495
+          ]
+        },
+        {
+          "text": "From the Last date of Exam till Dec. 31, 2026",
+          "confidence": 0.9549360275268555,
+          "bbox": [
+            666,
+            1459,
+            1145,
+            1491
+          ]
+        },
+        {
+          "text": "Last date of examination to July 12, 2027",
+          "confidence": 0.9980881810188293,
+          "bbox": [
+            1195,
+            1469,
+            1633,
+            1499
+          ]
+        },
+        {
+          "text": "15.",
+          "confidence": 0.9963054060935974,
+          "bbox": [
+            124,
+            1510,
+            165,
+            1539
+          ]
+        },
+        {
+          "text": "Commencement of Classes session 2026-27",
+          "confidence": 0.9960016012191772,
+          "bbox": [
+            177,
+            1511,
+            644,
+            1539
+          ]
+        },
+        {
+          "text": "For III, V, VII & IX Semester July 13, 2027",
+          "confidence": 0.9815307259559631,
+          "bbox": [
+            982,
+            1513,
+            1444,
+            1543
+          ]
+        },
+        {
+          "text": "*The dates are subject to modification as per updates from AICTE/PCI.",
+          "confidence": 0.9864747524261475,
+          "bbox": [
+            177,
+            1540,
+            1034,
+            1577
+          ]
+        },
+        {
+          "text": "Γåô",
+          "confidence": 0.3825386166572571,
+          "bbox": [
+            1655,
+            1534,
+            1660,
+            1541
+          ]
+        },
+        {
+          "text": "IMPORTANT NOTES:",
+          "confidence": 0.9984551668167114,
+          "bbox": [
+            83,
+            1574,
+            363,
+            1605
+          ]
+        },
+        {
+          "text": "1. The institute shall ensure minimum teaching hours as prescribed in the University ordinances for each semester. If required, the",
+          "confidence": 0.9904688596725464,
+          "bbox": [
+            109,
+            1605,
+            1684,
+            1641
+          ]
+        },
+        {
+          "text": "Director/Principal shall arrange extra classes on weekends /holidays in offline/online mode.",
+          "confidence": 0.9957311749458313,
+          "bbox": [
+            131,
+            1639,
+            1183,
+            1669
+          ]
+        },
+        {
+          "text": "2. The Institute should ensure that at least two class tests are conducted after completing 1/3rd& 2/3rd syllabus respectively. All students will be",
+          "confidence": 0.988736629486084,
+          "bbox": [
+            108,
+            1669,
+            1685,
+            1703
+          ]
+        },
+        {
+          "text": "required to appear in both first- and second-class tests. If, for any reason beyond the control of students such as illness, tragic incident in",
+          "confidence": 0.9946455359458923,
+          "bbox": [
+            131,
+            1701,
+            1684,
+            1735
+          ]
+        },
+        {
+          "text": "family, the student fails to appear in any test, it will be the responsibility of the Principle/Director of the Institute to arrange make up class",
+          "confidence": 0.9907035231590271,
+          "bbox": [
+            131,
+            1732,
+            1684,
+            1768
+          ]
+        },
+        {
+          "text": "test for such students. If the student fails to appear in first class test, his makeup class test will be conducted before second class test and in",
+          "confidence": 0.9881751537322998,
+          "bbox": [
+            132,
+            1765,
+            1683,
+            1797
+          ]
+        },
+        {
+          "text": "case of second-class test at least one month before the start of end semester theory examination. The duration of class test will be minimum",
+          "confidence": 0.9884059429168701,
+          "bbox": [
+            133,
+            1796,
+            1684,
+            1830
+          ]
+        },
+        {
+          "text": "one hour for each class test. In case attendance is short; parents be informed accordingly on monthly basis.",
+          "confidence": 0.9904513955116272,
+          "bbox": [
+            132,
+            1829,
+            1314,
+            1862
+          ]
+        },
+        {
+          "text": "3. The Director/Principal of Institute shall ensure the submission of attendance of students regularly through Attendance Monitoring System",
+          "confidence": 0.9889665842056274,
+          "bbox": [
+            110,
+            1860,
+            1684,
+            1895
+          ]
+        },
+        {
+          "text": "(AMS) of the University and shall ensure that no student is allowed to appear in the examinations who has not attained the minimum required",
+          "confidence": 0.9772527813911438,
+          "bbox": [
+            133,
+            1892,
+            1685,
+            1926
+          ]
+        },
+        {
+          "text": "attendance as per norms prescribed in relevant ordinances. It will be obligatory on the part of the Director/Principal of the Institute to detain",
+          "confidence": 0.9920852184295654,
+          "bbox": [
+            132,
+            1923,
+            1685,
+            1958
+          ]
+        },
+        {
+          "text": "such students and their admit cards will not be issued to them. A list of students detained from appearing in University Examination(s) be",
+          "confidence": 0.9882352352142334,
+          "bbox": [
+            133,
+            1953,
+            1684,
+            1990
+          ]
+        },
+        {
+          "text": "submitted to their Examination center before the commencement of the theory examination.",
+          "confidence": 0.9928575158119202,
+          "bbox": [
+            133,
+            1986,
+            1153,
+            2019
+          ]
+        },
+        {
+          "text": "4. The teachers who are assigned evaluation duty during vacation shall be entitled for earned leave as per rules and duty leave for other",
+          "confidence": 0.9782639145851135,
+          "bbox": [
+            110,
+            2016,
+            1685,
+            2053
+          ]
+        },
+        {
+          "text": "examination related works assigned by the University.",
+          "confidence": 0.9881972074508667,
+          "bbox": [
+            133,
+            2050,
+            739,
+            2082
+          ]
+        },
+        {
+          "text": "5. The loss of syllabus for the newly admitted third semester B. Tech & B. Pharma students has to be COMPULSORILY made up by the",
+          "confidence": 0.9817329049110413,
+          "bbox": [
+            112,
+            2079,
+            1685,
+            2117
+          ]
+        },
+        {
+          "text": "institutes by conducting extra classes in early morning/late evening/Sunday/holidays.",
+          "confidence": 0.9876112937927246,
+          "bbox": [
+            134,
+            2111,
+            1108,
+            2146
+          ]
+        },
+        {
+          "text": "Registrar",
+          "confidence": 0.9999069571495056,
+          "bbox": [
+            1435,
+            2270,
+            1583,
+            2312
+          ]
+        }
+      ]
+    }
+  ]
+}
