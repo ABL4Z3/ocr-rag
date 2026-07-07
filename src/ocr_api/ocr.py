@@ -154,7 +154,11 @@ class OCRService:
             from easyocr import Reader
 
             unique = list(dict.fromkeys(langs))
-            self._engine = Reader(unique, gpu=False)
+            self._engine = Reader(
+                unique,
+                gpu=False,
+                model_storage_directory="/root/.EasyOCR/model/",
+            )
             self._engine_type = "easyocr"
         else:
             from paddleocr import PaddleOCR
