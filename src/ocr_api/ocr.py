@@ -19,19 +19,95 @@ DOCX_EXTENSIONS = {".docx"}
 # EasyOCR handles Devanagari scripts correctly
 DEVANAGARI_LANGS = {"hi", "mr", "ne", "sa"}
 
+LANG_ALIASES = {
+    "hindi": "hi",
+    "marathi": "mr",
+    "nepali": "ne",
+    "sanskrit": "sa",
+    "english": "en",
+}
+
+
+def _normalize_lang(lang: str | None) -> str | None:
+    if not lang:
+        return lang
+    parts = [LANG_ALIASES.get(p.strip(), p.strip()) for p in lang.split(",")]
+    return ",".join(parts)
+
 
 def _has_devanagari(text: str) -> bool:
     return any("\u0900" <= c <= "\u097F" for c in text)
 
 
-def _needs_ocr_force(lang: str | None, native_text: str) -> bool:
-    """Force OCR when lang is Devanagari but native text layer lacks Devanagari Unicode."""
-    if not lang:
+def _looks_like_krutidev(text: str) -> bool:
+    lines = [ln.strip() for ln in text.splitlines() if len(ln.strip()) > 3]
+    if len(lines) < 2:
         return False
-    target = lang
-    langs = [code.strip() for code in target.split(",")]
-    is_devanagari_lang = any(c in DEVANAGARI_LANGS for c in langs)
-    return is_devanagari_lang and not _has_devanagari(native_text)
+    kruti_lines = 0
+    for line in lines:
+        alpha = [c for c in line if c.isascii() and c.isalpha()]
+        if len(alpha) < 3:
+            continue
+        uppercase = sum(1 for c in alpha if c.isupper())
+        ucase_ratio = uppercase / max(len(alpha), 1)
+        vowels = sum(1 for c in alpha if c.lower() in "aeiou")
+        vowel_ratio = vowels / max(len(alpha), 1)
+        specials = sum(1 for c in line if c in "0/|'~#@;,`\\")
+        extended = sum(1 for c in line if 127 < ord(c) < 256)
+
+        low_vowel = vowel_ratio < 0.2
+        many_specials = specials >= 2
+        has_extended = extended >= 1
+        high_ucase = ucase_ratio > 0.25
+
+        if low_vowel or many_specials or has_extended or high_ucase:
+            kruti_lines += 1
+
+    return kruti_lines / max(len(lines), 1) > 0.15
+
+
+_COMMON_EN_WORDS = frozenset(
+    "the and for are has was not but all any can you this that from with have been "
+    "were also its their them about would could should into after other which where "
+    "when what each both than then more some these those here there only over such "
+    "very college university faculty institute school phone email website www com"
+    .split()
+)
+
+
+def _is_english_line(line: str) -> bool:
+    lower = line.strip().lower()
+    if not lower:
+        return True
+    if "www." in lower or ".com" in lower:
+        return True
+    words = __import__("re").findall(r"[A-Za-z]{3,}", lower)
+    if len(words) >= 2 and sum(1 for w in words if w in _COMMON_EN_WORDS) >= 1:
+        return True
+    if __import__("re").search(r"\b[A-Z]\.", line):
+        return True
+    return False
+
+
+def _convert_krutidev(text: str) -> str:
+    from lipi import HindiPreprocessor
+
+    lines = text.splitlines()
+    result = []
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            result.append(line)
+            continue
+        if _is_english_line(stripped):
+            result.append(line)
+            continue
+        alpha = [c for c in stripped if c.isascii() and c.isalpha()]
+        if len(alpha) < 3:
+            result.append(line)
+            continue
+        result.append(HindiPreprocessor.convert(stripped, font_type="krutidev"))
+    return "\n".join(result)
 
 
 class OCRService:
@@ -41,7 +117,7 @@ class OCRService:
         self._engine_type: str | None = None
 
     def load(self, lang: str | None = None) -> None:
-        target = lang or settings.ocr_lang
+        target = _normalize_lang(lang or settings.ocr_lang)
         if self._engine is not None and self._lang == target:
             return
 
@@ -96,22 +172,33 @@ class OCRService:
             pages=pages,
         )
 
+    def _make_text_page(self, page_number: int, text: str) -> OCRPage:
+        return OCRPage(
+            page_number=page_number,
+            source="text-layer",
+            text=text,
+            lines=[OCRLine(text=line) for line in text.splitlines() if line.strip()],
+        )
+
     def extract_pdf(self, path: Path, lang: str | None = None) -> list[OCRPage]:
         pages: list[OCRPage] = []
         with fitz.open(path) as document:
             for index, page in enumerate(document, start=1):
                 text = page.get_text("text").strip()
-                if text and not _needs_ocr_force(lang, text):
-                    pages.append(
-                        OCRPage(
-                            page_number=index,
-                            source="text-layer",
-                            text=text,
-                            lines=[OCRLine(text=line) for line in text.splitlines() if line.strip()],
-                        )
-                    )
+                if text:
+                    if _has_devanagari(text):
+                        pages.append(self._make_text_page(index, text))
+                        continue
+
+                    if _looks_like_krutidev(text):
+                        converted = _convert_krutidev(text)
+                        pages.append(self._make_text_page(index, converted))
+                        continue
+
+                    pages.append(self._make_text_page(index, text))
                     continue
 
+                # Image-based page — use OCR
                 pix = page.get_pixmap(dpi=settings.ocr_dpi, alpha=False)
                 with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp:
                     image_path = Path(tmp.name)
