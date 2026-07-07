@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -27,6 +28,78 @@ LANG_ALIASES = {
     "english": "en",
 }
 
+# ---------------------------------------------------------------------------
+# Preserved tokens (URLs, emails, phones)
+# ---------------------------------------------------------------------------
+
+_URL_RE = re.compile(r"https?://\S+|www\.\S+", re.IGNORECASE)
+_EMAIL_RE = re.compile(r"\S+@\S+\.\S+")
+_PHONE_RE = re.compile(r"\+?[\d][\d\s\-\(\)]{6,}[\d]")
+
+
+# ---------------------------------------------------------------------------
+# Language detection
+# ---------------------------------------------------------------------------
+
+
+def _has_devanagari(text: str) -> bool:
+    return any("\u0900" <= c <= "\u097F" for c in text)
+
+
+def _detect_language(text: str) -> str:
+    """Detect language from Unicode text content."""
+    deva_count = sum(1 for c in text if "\u0900" <= c <= "\u097F")
+    latin_count = sum(1 for c in text if c.isascii() and c.isalpha())
+    total = deva_count + latin_count
+    if total == 0:
+        return "en"
+    deva_ratio = deva_count / total
+    if deva_ratio > 0.7:
+        return "hi"
+    if deva_ratio > 0.1:
+        return "hi,en"
+    return "en"
+
+
+def _looks_like_krutidev(text: str) -> bool:
+    """Heuristic: is this text Kruti Dev font-encoded (not Unicode)?"""
+    lines = [ln.strip() for ln in text.splitlines() if len(ln.strip()) > 1]
+    if len(lines) < 2:
+        return False
+    kruti_lines = 0
+    for line in lines:
+        # Skip lines that are clearly URLs or emails
+        if _URL_RE.search(line) or _EMAIL_RE.search(line):
+            continue
+        alpha = [c for c in line if c.isascii() and c.isalpha()]
+        if not alpha:
+            continue
+        uppercase = sum(1 for c in alpha if c.isupper())
+        ucase_ratio = uppercase / len(alpha)
+        vowels = sum(1 for c in alpha if c.lower() in "aeiou")
+        vowel_ratio = vowels / len(alpha)
+        specials = sum(1 for c in line if c in "0/|'~#@;,`\\")
+        extended = sum(1 for c in line if 127 < ord(c) < 256)
+
+        # Kruti Dev signatures:
+        # - very few vowels (consonant-heavy ASCII)
+        # - lots of special chars used as vowel signs
+        # - extended Latin-1 range (0x80-0xFF) for matras
+        # - high uppercase ratio (ka/kha etc mapped to uppercase)
+        score = 0
+        if vowel_ratio < 0.18:
+            score += 2
+        if specials >= 2:
+            score += 1
+        if extended >= 1:
+            score += 2
+        if ucase_ratio > 0.25:
+            score += 1
+        if score >= 3:
+            kruti_lines += 1
+
+    return kruti_lines / max(len(lines), 1) > 0.15
+
 
 def _normalize_lang(lang: str | None) -> str | None:
     if not lang:
@@ -35,43 +108,12 @@ def _normalize_lang(lang: str | None) -> str | None:
     return ",".join(parts)
 
 
-def _has_devanagari(text: str) -> bool:
-    return any("\u0900" <= c <= "\u097F" for c in text)
-
-
-def _looks_like_krutidev(text: str) -> bool:
-    lines = [ln.strip() for ln in text.splitlines() if len(ln.strip()) > 3]
-    if len(lines) < 2:
-        return False
-    kruti_lines = 0
-    for line in lines:
-        alpha = [c for c in line if c.isascii() and c.isalpha()]
-        if len(alpha) < 3:
-            continue
-        uppercase = sum(1 for c in alpha if c.isupper())
-        ucase_ratio = uppercase / max(len(alpha), 1)
-        vowels = sum(1 for c in alpha if c.lower() in "aeiou")
-        vowel_ratio = vowels / max(len(alpha), 1)
-        specials = sum(1 for c in line if c in "0/|'~#@;,`\\")
-        extended = sum(1 for c in line if 127 < ord(c) < 256)
-
-        low_vowel = vowel_ratio < 0.2
-        many_specials = specials >= 2
-        has_extended = extended >= 1
-        high_ucase = ucase_ratio > 0.25
-
-        if low_vowel or many_specials or has_extended or high_ucase:
-            kruti_lines += 1
-
-    return kruti_lines / max(len(lines), 1) > 0.15
-
-
 _COMMON_EN_WORDS = frozenset(
     "the and for are has was not but all any can you this that from with have been "
     "were also its their them about would could should into after other which where "
     "when what each both than then more some these those here there only over such "
-    "very college university faculty institute school phone email website www com"
-    .split()
+    "very college university faculty institute school phone email website www com "
+    "dr mr ms prof department".split()
 )
 
 
@@ -79,35 +121,19 @@ def _is_english_line(line: str) -> bool:
     lower = line.strip().lower()
     if not lower:
         return True
-    if "www." in lower or ".com" in lower:
+    if _URL_RE.search(lower) or _EMAIL_RE.search(lower):
         return True
-    words = __import__("re").findall(r"[A-Za-z]{3,}", lower)
+    words = re.findall(r"[A-Za-z]{3,}", lower)
     if len(words) >= 2 and sum(1 for w in words if w in _COMMON_EN_WORDS) >= 1:
         return True
-    if __import__("re").search(r"\b[A-Z]\.", line):
+    if re.search(r"\b[A-Z]\.", line):
         return True
     return False
 
 
-def _convert_krutidev(text: str) -> str:
-    from lipi import HindiPreprocessor
-
-    lines = text.splitlines()
-    result = []
-    for line in lines:
-        stripped = line.strip()
-        if not stripped:
-            result.append(line)
-            continue
-        if _is_english_line(stripped):
-            result.append(line)
-            continue
-        alpha = [c for c in stripped if c.isascii() and c.isalpha()]
-        if len(alpha) < 3:
-            result.append(line)
-            continue
-        result.append(HindiPreprocessor.convert(stripped, font_type="krutidev"))
-    return "\n".join(result)
+# ---------------------------------------------------------------------------
+# OCRService
+# ---------------------------------------------------------------------------
 
 
 class OCRService:
@@ -117,7 +143,7 @@ class OCRService:
         self._engine_type: str | None = None
 
     def load(self, lang: str | None = None) -> None:
-        target = _normalize_lang(lang or settings.ocr_lang)
+        target = _normalize_lang(lang) or _normalize_lang(settings.ocr_lang) or "en"
         if self._engine is not None and self._lang == target:
             return
 
@@ -126,11 +152,13 @@ class OCRService:
 
         if use_easyocr:
             from easyocr import Reader
+
             unique = list(dict.fromkeys(langs))
             self._engine = Reader(unique, gpu=False)
             self._engine_type = "easyocr"
         else:
             from paddleocr import PaddleOCR
+
             self._engine = PaddleOCR(
                 lang=target,
                 use_doc_orientation_classify=settings.ocr_use_doc_orientation_classify,
@@ -141,7 +169,9 @@ class OCRService:
 
         self._lang = target
 
-    async def extract_upload(self, upload: UploadFile, lang: str | None = None) -> OCRResponse:
+    async def extract_upload(
+        self, upload: UploadFile, lang: str | None = None
+    ) -> OCRResponse:
         suffix = Path(upload.filename or "").suffix.lower()
         if suffix not in OCR_EXTENSIONS | PDF_EXTENSIONS | DOCX_EXTENSIONS:
             raise HTTPException(
@@ -164,18 +194,31 @@ class OCRService:
             path.unlink(missing_ok=True)
 
         text = "\n\n".join(page.text for page in pages if page.text.strip())
+        detected_lang = _detect_language(text)
+        avg_conf = self._avg_confidence(pages)
         return OCRResponse(
             filename=upload.filename or path.name,
             content_type=upload.content_type,
             page_count=len(pages),
+            language=detected_lang,
+            avg_confidence=avg_conf,
             text=text,
             pages=pages,
         )
 
-    def _make_text_page(self, page_number: int, text: str) -> OCRPage:
+    def _avg_confidence(self, pages: list[OCRPage]) -> float | None:
+        scores = [
+            line.confidence
+            for page in pages
+            for line in page.lines
+            if line.confidence is not None
+        ]
+        return round(sum(scores) / len(scores), 4) if scores else None
+
+    def _make_text_page(self, page_number: int, text: str, source: str = "text-layer") -> OCRPage:
         return OCRPage(
             page_number=page_number,
-            source="text-layer",
+            source=source,
             text=text,
             lines=[OCRLine(text=line) for line in text.splitlines() if line.strip()],
         )
@@ -187,14 +230,26 @@ class OCRService:
                 text = page.get_text("text").strip()
                 if text:
                     if _has_devanagari(text):
+                        # Unicode text layer — return as-is
                         pages.append(self._make_text_page(index, text))
                         continue
 
                     if _looks_like_krutidev(text):
-                        converted = _convert_krutidev(text)
-                        pages.append(self._make_text_page(index, converted))
+                        # Legacy font encoding — render page and OCR with EasyOCR
+                        # Font-mapping approach was unreliable (no authoritative mapping table)
+                        pix = page.get_pixmap(dpi=settings.ocr_dpi, alpha=False)
+                        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp:
+                            image_path = Path(tmp.name)
+                        pix.save(image_path)
+                        try:
+                            pages.append(
+                                self.extract_image(image_path, page_number=index, lang=lang)
+                            )
+                        finally:
+                            image_path.unlink(missing_ok=True)
                         continue
 
+                    # English or other script — return as-is
                     pages.append(self._make_text_page(index, text))
                     continue
 
@@ -204,7 +259,9 @@ class OCRService:
                     image_path = Path(tmp.name)
                 pix.save(image_path)
                 try:
-                    pages.append(self.extract_image(image_path, page_number=index, lang=lang))
+                    pages.append(
+                        self.extract_image(image_path, page_number=index, lang=lang)
+                    )
                 finally:
                     image_path.unlink(missing_ok=True)
         return pages
@@ -222,7 +279,9 @@ class OCRService:
             )
         ]
 
-    def extract_image(self, path: Path, page_number: int, lang: str | None = None) -> OCRPage:
+    def extract_image(
+        self, path: Path, page_number: int, lang: str | None = None
+    ) -> OCRPage:
         self.load(lang)
         assert self._engine is not None
 
@@ -230,10 +289,17 @@ class OCRService:
             results = self._engine.readtext(str(path))
             lines = []
             for bbox, text, confidence in results:
-                if not str(text).strip():
+                text = str(text).strip()
+                if not text:
+                    continue
+                if float(confidence) < 0.01:
                     continue
                 lines.append(
-                    OCRLine(text=str(text), confidence=float(confidence), bbox=self._jsonable(bbox))
+                    OCRLine(
+                        text=text,
+                        confidence=float(confidence),
+                        bbox=self._jsonable(bbox),
+                    )
                 )
         else:
             if hasattr(self._engine, "predict"):
@@ -254,9 +320,29 @@ class OCRService:
 
         for result in raw_results or []:
             data = self._to_mapping(result)
-            rec_texts = data.get("rec_texts") if data.get("rec_texts") is not None else data.get("texts") if data.get("texts") is not None else []
-            rec_scores = data.get("rec_scores") if data.get("rec_scores") is not None else data.get("scores") if data.get("scores") is not None else []
-            rec_boxes = data.get("rec_boxes") if data.get("rec_boxes") is not None else data.get("rec_polys") if data.get("rec_polys") is not None else data.get("dt_polys") if data.get("dt_polys") is not None else []
+            rec_texts = (
+                data.get("rec_texts")
+                if data.get("rec_texts") is not None
+                else data.get("texts")
+                if data.get("texts") is not None
+                else []
+            )
+            rec_scores = (
+                data.get("rec_scores")
+                if data.get("rec_scores") is not None
+                else data.get("scores")
+                if data.get("scores") is not None
+                else []
+            )
+            rec_boxes = (
+                data.get("rec_boxes")
+                if data.get("rec_boxes") is not None
+                else data.get("rec_polys")
+                if data.get("rec_polys") is not None
+                else data.get("dt_polys")
+                if data.get("dt_polys") is not None
+                else []
+            )
 
             for index, text in enumerate(rec_texts):
                 if not str(text).strip():
@@ -331,4 +417,3 @@ class OCRService:
 
 
 ocr_service = OCRService()
-
