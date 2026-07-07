@@ -20,6 +20,20 @@ DOCX_EXTENSIONS = {".docx"}
 DEVANAGARI_LANGS = {"hi", "mr", "ne", "sa"}
 
 
+def _has_devanagari(text: str) -> bool:
+    return any("\u0900" <= c <= "\u097F" for c in text)
+
+
+def _needs_ocr_force(lang: str | None, native_text: str) -> bool:
+    """Force OCR when lang is Devanagari but native text layer lacks Devanagari Unicode."""
+    if not lang:
+        return False
+    target = lang
+    langs = [code.strip() for code in target.split(",")]
+    is_devanagari_lang = any(c in DEVANAGARI_LANGS for c in langs)
+    return is_devanagari_lang and not _has_devanagari(native_text)
+
+
 class OCRService:
     def __init__(self) -> None:
         self._engine: Any | None = None
@@ -87,7 +101,7 @@ class OCRService:
         with fitz.open(path) as document:
             for index, page in enumerate(document, start=1):
                 text = page.get_text("text").strip()
-                if text:
+                if text and not _needs_ocr_force(lang, text):
                     pages.append(
                         OCRPage(
                             page_number=index,
