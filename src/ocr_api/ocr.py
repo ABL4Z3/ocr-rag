@@ -15,25 +15,40 @@ OCR_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
 PDF_EXTENSIONS = {".pdf"}
 DOCX_EXTENSIONS = {".docx"}
 
+# PaddleOCR devanagari model outputs romanized transliteration (not Unicode)
+# EasyOCR handles Devanagari scripts correctly
+DEVANAGARI_LANGS = {"hi", "mr", "ne", "sa"}
+
 
 class OCRService:
     def __init__(self) -> None:
         self._engine: Any | None = None
         self._lang: str | None = None
+        self._engine_type: str | None = None
 
     def load(self, lang: str | None = None) -> None:
         target = lang or settings.ocr_lang
         if self._engine is not None and self._lang == target:
             return
 
-        from paddleocr import PaddleOCR
+        langs = [code.strip() for code in target.split(",")]
+        use_easyocr = any(code in DEVANAGARI_LANGS for code in langs)
 
-        self._engine = PaddleOCR(
-            lang=target,
-            use_doc_orientation_classify=settings.ocr_use_doc_orientation_classify,
-            use_doc_unwarping=settings.ocr_use_doc_unwarping,
-            use_textline_orientation=settings.ocr_use_textline_orientation,
-        )
+        if use_easyocr:
+            from easyocr import Reader
+            unique = list(dict.fromkeys(langs))
+            self._engine = Reader(unique, gpu=False)
+            self._engine_type = "easyocr"
+        else:
+            from paddleocr import PaddleOCR
+            self._engine = PaddleOCR(
+                lang=target,
+                use_doc_orientation_classify=settings.ocr_use_doc_orientation_classify,
+                use_doc_unwarping=settings.ocr_use_doc_unwarping,
+                use_textline_orientation=settings.ocr_use_textline_orientation,
+            )
+            self._engine_type = "paddle"
+
         self._lang = target
 
     async def extract_upload(self, upload: UploadFile, lang: str | None = None) -> OCRResponse:
@@ -110,12 +125,22 @@ class OCRService:
         self.load(lang)
         assert self._engine is not None
 
-        if hasattr(self._engine, "predict"):
-            raw_results = self._engine.predict(str(path))
+        if self._engine_type == "easyocr":
+            results = self._engine.readtext(str(path))
+            lines = []
+            for bbox, text, confidence in results:
+                if not str(text).strip():
+                    continue
+                lines.append(
+                    OCRLine(text=str(text), confidence=float(confidence), bbox=self._jsonable(bbox))
+                )
         else:
-            raw_results = self._engine.ocr(str(path))
+            if hasattr(self._engine, "predict"):
+                raw_results = self._engine.predict(str(path))
+            else:
+                raw_results = self._engine.ocr(str(path))
+            lines = self._extract_lines(raw_results)
 
-        lines = self._extract_lines(raw_results)
         return OCRPage(
             page_number=page_number,
             source="ocr" if path.suffix.lower() == ".png" else "image",
