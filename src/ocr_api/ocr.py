@@ -102,8 +102,8 @@ def _looks_like_krutidev(text: str) -> bool:
 
 
 def _normalize_lang(lang: str | None) -> str | None:
-    if not lang:
-        return lang
+    if not lang or lang.strip().lower() in ("null", "undefined", "none", ""):
+        return None
     parts = [LANG_ALIASES.get(p.strip(), p.strip()) for p in lang.split(",")]
     return ",".join(parts)
 
@@ -153,9 +153,12 @@ class OCRService:
         if use_easyocr:
             from easyocr import Reader
 
-            unique = list(dict.fromkeys(langs))
+            # Use only hi+en models regardless of specific Devanagari lang requested.
+            # Hindi model covers the full Devanagari script (shared by mr/ne/sa).
+            # Loading all 4 Devanagari models exceeds 512MB RAM on free-tier hosts.
+            easyocr_langs = ["hi", "en"]
             self._engine = Reader(
-                unique,
+                easyocr_langs,
                 gpu=False,
                 model_storage_directory="/root/.EasyOCR/model/",
             )

@@ -10,8 +10,10 @@ from .schemas import OCRResponse
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    if settings.ocr_eager_load:
-        ocr_service.load()
+    # Always pre-load EasyOCR at startup (hi+en models cover all Devanagari scripts).
+    # Lazy loading causes OOM on first request on memory-constrained hosts; pre-loading
+    # surfaces the OOM at startup (health check fails) and keeps the model resident.
+    ocr_service.load("hi")
     yield
 
 
